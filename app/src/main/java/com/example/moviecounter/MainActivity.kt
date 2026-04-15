@@ -40,7 +40,7 @@ fun MovieCounter() {
                 movieName = ""
             }, shape = RoundedCornerShape(16.dp)) {
 
-                Text("RESET")z
+                Text("RESET")
             }
         }
     ) { paddingValues ->
@@ -58,7 +58,7 @@ fun MovieCounter() {
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
                 Text(
-                    text = "Total películas: $count",
+                    text = "Mi lista personal: $count",
                     modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally),
                     style = MaterialTheme.typography.headlineSmall
                 )
