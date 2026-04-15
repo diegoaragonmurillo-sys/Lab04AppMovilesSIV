@@ -58,7 +58,7 @@ fun MovieCounter() {
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
                 Text(
-                    text = "Total películas: $count",
+                    "Películas vistas por Compañero: $count"
                     modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally),
                     style = MaterialTheme.typography.headlineSmall
                 )
