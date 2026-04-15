@@ -1,5 +1,6 @@
 package com.example.moviecounter
 
+import android.R.attr.shape
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,6 +11,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,9 +38,9 @@ fun MovieCounter() {
             FloatingActionButton(onClick = {
                 count = 0
                 movieName = ""
-            }) {
+            }, shape = RoundedCornerShape(16.dp)) {
 
-                Text("RESET")
+                Text("RESET")z
             }
         }
     ) { paddingValues ->
