@@ -26,6 +26,7 @@ class MainActivity : ComponentActivity() {
 fun MovieCounter() {
     var count by rememberSaveable { mutableStateOf(0) }
     var movieName by remember { mutableStateOf("") }
+    var isWatched by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
@@ -33,14 +34,34 @@ fun MovieCounter() {
         verticalArrangement = Arrangement.Center
     ) {
         Text(text = "Has añadido $count películas.", style = MaterialTheme.typography.headlineSmall)
-        Spacer(modifier = Modifier.height(16.dp))
+
+        HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
+
         TextField(
             value = movieName,
             onValueChange = { movieName = it },
             label = { Text("Nombre de la película") }
         )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Checkbox(
+                checked = isWatched,
+                onCheckedChange = { isWatched = it }
+            )
+            Text("¿Ya la viste?")
+        }
+
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = { if (movieName.isNotBlank()) { count++; movieName = "" } }) {
+
+        Button(onClick = {
+            if (movieName.isNotBlank()) {
+                count++
+                movieName = ""
+                isWatched = false
+            }
+        }) {
             Text("Añadir Película")
         }
     }
