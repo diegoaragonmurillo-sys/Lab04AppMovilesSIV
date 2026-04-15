@@ -53,6 +53,7 @@ fun MovieCounter() {
             verticalArrangement = Arrangement.Center
         ) {
             Card(
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
                 modifier = Modifier.fillMaxWidth().padding(8.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
