@@ -27,66 +27,78 @@ fun MovieCounter() {
     var count by rememberSaveable { mutableStateOf(0) }
     var movieName by remember { mutableStateOf("") }
     var isWatched by remember { mutableStateOf(false) }
-    var isRelease by remember { mutableStateOf(false) } // Nuevo estado para el Switch
+    var isRelease by remember { mutableStateOf(false) }
 
-    Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        // --- COMPONENTE CARD (Envuelve el contador) ---
-        Card(
-            modifier = Modifier.fillMaxWidth().padding(8.dp),
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+
+    Scaffold(
+        floatingActionButton = {
+
+            FloatingActionButton(onClick = {
+                count = 0
+                movieName = ""
+            }) {
+
+                Text("RESET")
+            }
+        }
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Text(
-                text = "Total películas: $count",
-                modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally),
-                style = MaterialTheme.typography.headlineSmall
+            Card(
+                modifier = Modifier.fillMaxWidth().padding(8.dp),
+                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            ) {
+                Text(
+                    text = "Total películas: $count",
+                    modifier = Modifier.padding(16.dp).align(Alignment.CenterHorizontally),
+                    style = MaterialTheme.typography.headlineSmall
+                )
+            }
+
+            HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
+
+            TextField(
+                value = movieName,
+                onValueChange = { movieName = it },
+                label = { Text("Nombre de la película") },
+                modifier = Modifier.fillMaxWidth()
             )
-        }
 
-        HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(vertical = 8.dp)
+            ) {
+                Text("¿Es un estreno?")
+                Spacer(modifier = Modifier.width(8.dp))
+                Switch(checked = isRelease, onCheckedChange = { isRelease = it })
+            }
 
-        TextField(
-            value = movieName,
-            onValueChange = { movieName = it },
-            label = { Text("Nombre de la película") },
-            modifier = Modifier.fillMaxWidth()
-        )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Checkbox(checked = isWatched, onCheckedChange = { isWatched = it })
+                Text("¿Ya la viste?")
+            }
 
-        // --- COMPONENTE SWITCH (Nuevo) ---
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(vertical = 8.dp)
-        ) {
-            Text("¿Es un estreno?")
-            Spacer(modifier = Modifier.width(8.dp))
-            Switch(
-                checked = isRelease,
-                onCheckedChange = { isRelease = it }
-            )
-        }
+            Spacer(modifier = Modifier.height(16.dp))
 
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Checkbox(checked = isWatched, onCheckedChange = { isWatched = it })
-            Text("¿Ya la viste?")
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(
-            onClick = {
-                if (movieName.isNotBlank()) {
-                    count++
-                    movieName = ""
-                    isWatched = false
-                    isRelease = false
-                }
-            },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Añadir Película")
+            Button(
+                onClick = {
+                    if (movieName.isNotBlank()) {
+                        count++
+                        movieName = ""
+                        isWatched = false
+                        isRelease = false
+                    }
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Añadir Película")
+            }
         }
     }
 }
